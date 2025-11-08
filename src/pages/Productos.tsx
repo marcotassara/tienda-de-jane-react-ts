@@ -3,20 +3,30 @@ import ProductCard from "../sharedComponents/ProductCard"
 import type { Product } from "../data/products"
 import { products as demoProducts } from "../data/products"
 
+// NUEVO: carrito + navegación
+import { useCart } from "../context/CartContext"
+import { useNavigate } from "react-router-dom"
+
 export default function Productos() {
   // Estado base
   const [products, setProducts] = useState<Product[]>([])
+
+  // Alta (crear)
   const [nombre, setNombre] = useState("")
   const [categoria, setCategoria] = useState("")
   const [imagenUrl, setImagenUrl] = useState("")
-  const [editandoId, setEditandoId] = useState<number | null>(null)
 
-  // Estado de edición inline
+  // Edición inline
+  const [editandoId, setEditandoId] = useState<number | null>(null)
   const [editNombre, setEditNombre] = useState("")
   const [editCategoria, setEditCategoria] = useState("")
   const [editImagenUrl, setEditImagenUrl] = useState("")
 
-  // Sembrar/leer desde localStorage
+  // NUEVO: carrito y navegación
+  const { add } = useCart()
+  const nav = useNavigate()
+
+  // Carga inicial: localStorage o demo
   useEffect(() => {
     const saved = localStorage.getItem("productos")
     if (saved) {
@@ -26,17 +36,19 @@ export default function Productos() {
       localStorage.setItem("productos", JSON.stringify(demoProducts))
     }
   }, [])
+
+  // Guardar en localStorage cuando cambian
   useEffect(() => {
     localStorage.setItem("productos", JSON.stringify(products))
   }, [products])
 
-  // Imágenes disponibles para el selector (tomadas del listado actual, sin duplicados)
+  // Imágenes disponibles a partir de los productos actuales (para el selector en edición)
   const availableImages = useMemo(() => {
     const set = new Set(products.map(p => p.image).filter(Boolean))
     return Array.from(set)
   }, [products])
 
-  // Crear / Editar (formulario superior)
+  // ===== Alta =====
   const handleGuardarNuevo = () => {
     if (!nombre.trim() || !categoria.trim()) return
     const nuevo: Product = {
@@ -44,15 +56,15 @@ export default function Productos() {
       name: nombre.trim(),
       category: categoria.trim(),
       image: imagenUrl.trim() || "/vite.svg",
-    }
+    } as Product
     setProducts(prev => [...prev, nuevo])
     setNombre("")
     setCategoria("")
     setImagenUrl("")
   }
 
-  // Comenzar edición de una card
-  const handleEditar = (id: number) => {
+  // ===== Edición =====
+  const iniciarEdicion = (id: number) => {
     const p = products.find(x => x.id === id)
     if (!p) return
     setEditandoId(id)
@@ -61,13 +73,17 @@ export default function Productos() {
     setEditImagenUrl(p.image ?? "")
   }
 
-  // Guardar cambios de la card
-  const handleGuardarEdicion = () => {
-    if (!editNombre.trim() || !editCategoria.trim() || editandoId === null) return
+  const guardarEdicion = () => {
+    if (editandoId === null || !editNombre.trim() || !editCategoria.trim()) return
     setProducts(prev =>
       prev.map(p =>
         p.id === editandoId
-          ? { ...p, name: editNombre.trim(), category: editCategoria.trim(), image: editImagenUrl.trim() || p.image }
+          ? {
+              ...p,
+              name: editNombre.trim(),
+              category: editCategoria.trim(),
+              image: editImagenUrl.trim() || p.image,
+            }
           : p
       )
     )
@@ -81,8 +97,11 @@ export default function Productos() {
     setEditImagenUrl("")
   }
 
-  const handleEliminar = (id: number) => setProducts(prev => prev.filter(p => p.id !== id))
+  const eliminarProducto = (id: number) => {
+    setProducts(prev => prev.filter(p => p.id !== id))
+  }
 
+  // Restaurar catálogo demo si quedas vacío
   const restaurarDemo = () => {
     setProducts(demoProducts)
     localStorage.setItem("productos", JSON.stringify(demoProducts))
@@ -92,7 +111,7 @@ export default function Productos() {
     <section className="section">
       <div className="container text-center">
         <h2 className="section-title">Gestión de Productos</h2>
-        <p className="mt-2">Agrega, edita (inline) o elimina productos. Todo queda guardado en tu navegador.</p>
+        <p className="mt-2">Agrega, edita o elimina productos fácilmente. Se guarda en tu navegador.</p>
 
         {/* Formulario de alta */}
         <div className="card p-4 mx-auto my-4" style={{ maxWidth: 560 }}>
@@ -125,9 +144,13 @@ export default function Productos() {
               />
             </div>
             <div className="col-12 d-flex gap-2">
-              <button onClick={handleGuardarNuevo} className="btn btn-danger w-100">➕ Agregar producto</button>
+              <button onClick={handleGuardarNuevo} className="btn btn-danger w-100">
+                ➕ Agregar producto
+              </button>
               {products.length === 0 && (
-                <button onClick={restaurarDemo} className="btn btn-outline-secondary">🔄 Restaurar demo</button>
+                <button onClick={restaurarDemo} className="btn btn-outline-secondary">
+                  🔄 Restaurar demo
+                </button>
               )}
             </div>
           </div>
@@ -138,7 +161,9 @@ export default function Productos() {
           {products.length === 0 ? (
             <div className="text-center">
               <p className="text-muted mb-3">No hay productos registrados.</p>
-              <button onClick={restaurarDemo} className="btn btn-outline-secondary">🔄 Restaurar catálogo demo</button>
+              <button onClick={restaurarDemo} className="btn btn-outline-secondary">
+                🔄 Restaurar catálogo demo
+              </button>
             </div>
           ) : (
             products.map((p) => (
@@ -173,7 +198,7 @@ export default function Productos() {
                       value={editImagenUrl}
                       onChange={(e) => setEditImagenUrl(e.target.value)}
                     />
-                    {/* Selector rápido de imágenes existentes */}
+                    {/* Selector rápido de imágenes existentes del catálogo */}
                     {availableImages.length > 0 && (
                       <select
                         className="form-select mb-2"
@@ -186,9 +211,8 @@ export default function Productos() {
                         ))}
                       </select>
                     )}
-
                     <div className="d-flex gap-2">
-                      <button onClick={handleGuardarEdicion} className="btn btn-primary w-100">💾 Guardar</button>
+                      <button onClick={guardarEdicion} className="btn btn-primary w-100">💾 Guardar</button>
                       <button onClick={cancelarEdicion} className="btn btn-outline-secondary w-100">✖️ Cancelar</button>
                     </div>
                   </div>
@@ -197,8 +221,28 @@ export default function Productos() {
                   <>
                     <ProductCard name={p.name} image={p.image} />
                     <div className="mt-2 d-flex gap-2">
-                      <button onClick={() => handleEditar(p.id)} className="btn btn-sm btn-outline-primary">✏️ Editar</button>
-                      <button onClick={() => handleEliminar(p.id)} className="btn btn-sm btn-outline-danger">❌ Eliminar</button>
+                      <button onClick={() => iniciarEdicion(p.id)} className="btn btn-sm btn-outline-primary">
+                        ✏️ Editar
+                      </button>
+                      <button onClick={() => eliminarProducto(p.id)} className="btn btn-sm btn-outline-danger">
+                        ❌ Eliminar
+                      </button>
+
+                      {/* NUEVO: Añadir al carrito con confirmación */}
+                      <button
+                        className="btn btn-sm btn-success"
+                        onClick={() => {
+                          const price = (p as any).price ?? 1000 // fallback si aún no usas precios reales
+                          add({ id: p.id, name: p.name, price, image: p.image }, 1)
+                          if (confirm("¿Deseas añadir otro producto al carrito?")) {
+                            // queda en /productos
+                          } else {
+                            nav("/checkout") // ir al pago
+                          }
+                        }}
+                      >
+                        🛒 Añadir
+                      </button>
                     </div>
                   </>
                 )}
