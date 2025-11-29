@@ -11,10 +11,9 @@ describe('ProductCard Component', () => {
 
     render(<ProductCard name={mockProps.name} image={mockProps.image} />);
 
-    // Verificamos el texto
     expect(screen.getByText('Coca-Cola Test')).toBeInTheDocument();
     
-    // Verificamos la imagen
+  
     const img = screen.getByRole('img');
     expect(img).toHaveAttribute('src', '/images/test.jpg');
     expect(img).toHaveAttribute('alt', 'Coca-Cola Test');

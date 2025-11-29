@@ -1,4 +1,4 @@
-// src/services/productService.ts
+
 
 const API_URL = "http://localhost:8081/api/products";
 
@@ -12,14 +12,14 @@ export interface Product {
 }
 
 export const productService = {
-  // 1. LEER TODOS
+
   async getAll(): Promise<Product[]> {
     const response = await fetch(API_URL);
     if (!response.ok) throw new Error("Error al cargar productos");
     return await response.json();
   },
 
-  // 2. CREAR (NUEVO)
+  
   async create(product: Omit<Product, "id">): Promise<Product> {
     const response = await fetch(API_URL, {
       method: "POST",
@@ -30,7 +30,7 @@ export const productService = {
     return await response.json();
   },
 
-  // 3. ACTUALIZAR (NUEVO)
+ 
   async update(id: number, product: Partial<Product>): Promise<Product> {
     const response = await fetch(`${API_URL}/${id}`, {
       method: "PUT",
@@ -41,7 +41,7 @@ export const productService = {
     return await response.json();
   },
 
-  // 4. ELIMINAR (NUEVO)
+  
   async remove(id: number): Promise<void> {
     const response = await fetch(`${API_URL}/${id}`, {
       method: "DELETE",

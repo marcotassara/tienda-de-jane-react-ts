@@ -1,14 +1,14 @@
-// src/services/authService.ts
 
-// URL de tu microservicio de Usuarios (Puerto 8080)
+
+
 const API_URL = "http://localhost:8100/api/usuarios";
 
 export interface User {
-  id?: number; // El ID es opcional al enviar, obligatorio al recibir
+  id?: number;
   username: string;
-  nombreCompleto?: string; // Opcional porque a veces el backend no lo devuelve en login simple
+  nombreCompleto?: string; 
   role: "ADMIN" | "USER";
-  password?: string; // Solo se envía al registrar
+  password?: string;
 }
 
 export interface AuthResponse {
@@ -23,7 +23,7 @@ export interface LoginRequest {
 }
 
 export const authService = {
-  // 1. Iniciar Sesión
+ 
   async login(credentials: LoginRequest): Promise<AuthResponse> {
     const response = await fetch(`${API_URL}/login`, {
       method: "POST",
@@ -40,9 +40,9 @@ export const authService = {
     return response.json();
   },
 
-  // 2. Registrarse (ESTA ES LA QUE FALTABA 👇)
+ 
   async register(user: any): Promise<User> {
-    // Nota: El backend espera un POST a /api/usuarios para crear
+
     const response = await fetch(API_URL, {
       method: "POST",
       headers: {
