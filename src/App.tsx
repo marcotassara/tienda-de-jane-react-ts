@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom"
 import Navbar from "./sharedComponents/Navbar"
 import Footer from "./sharedComponents/Footer"
 
+
 // Páginas
 import Home from "./pages/Home"
 import Nosotros from "./pages/Nosotros"
@@ -12,6 +13,9 @@ import Carrito from "./pages/Carrito"
 import Checkout from "./pages/Checkout"
 import Gracias from "./pages/Gracias"
 import IngresoStock from "./pages/IngresoStock"
+import { AuthProvider } from "./context/AuthContext"; 
+import Login from "./pages/Login"; //
+import Registro from "./pages/Registro";
 
 // Contexto del carrito
 import { CartProvider } from "./context/CartContext"
@@ -21,22 +25,26 @@ import ErrorBoundary from "./sharedComponents/ErrorBoundary"
 
 export default function App() {
   return (
-    <CartProvider>
-      <Navbar />
-      <ErrorBoundary>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/nosotros" element={<Nosotros />} />
-          <Route path="/productos" element={<Productos />} />
-          <Route path="/tiendas" element={<Tiendas />} />
-          <Route path="/acerca" element={<Acerca />} />
-          <Route path="/ingreso" element={<IngresoStock />} />
-          <Route path="/carrito" element={<Carrito />} />
-          <Route path="/checkout" element={<Checkout />} />
-          <Route path="/gracias" element={<Gracias />} />
-        </Routes>
-      </ErrorBoundary>
-      <Footer />
-    </CartProvider>
+    <AuthProvider>
+      <CartProvider>
+        <Navbar />
+        <ErrorBoundary>
+          <Routes>
+            <Route path="/registro" element={<Registro />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/nosotros" element={<Nosotros />} />
+            <Route path="/productos" element={<Productos />} />
+            <Route path="/tiendas" element={<Tiendas />} />
+            <Route path="/acerca" element={<Acerca />} />
+            <Route path="/ingreso" element={<IngresoStock />} />
+            <Route path="/carrito" element={<Carrito />} />
+            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/gracias" element={<Gracias />} />
+          </Routes>
+        </ErrorBoundary>
+        <Footer />
+      </CartProvider>
+    </AuthProvider>
   )
 }

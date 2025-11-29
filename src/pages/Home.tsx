@@ -1,26 +1,26 @@
-import { Link } from "react-router-dom"
 import { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
 import ProductCard from "../sharedComponents/ProductCard"
-import type { Product } from "../data/products"
+import { productService, type Product } from "../services/productService" // <--- Usamos el servicio nuevo
 
-// Imágenes locales
-import tienda from "../images/tienda.png"
-import atencion from "../images/atencion.jpeg"
-import calidad from "../images/calidad.jpeg"
-import comunidad from "../images/comunidad.jpeg"
+// Eliminamos los imports de imágenes viejos
+// import tienda from "../images/tienda.png" ...
 
 export default function Home() {
   const [featured, setFeatured] = useState<Product[]>([])
 
   useEffect(() => {
-    // Carga productos desde localStorage para mostrar “Destacados”
-    try {
-      const raw = localStorage.getItem("productos")
-      const list: Product[] = raw ? JSON.parse(raw) : []
-      setFeatured(Array.isArray(list) ? list.slice(0, 4) : [])
-    } catch {
-      setFeatured([])
+    // Carga los productos reales desde el Backend (Puerto 8081)
+    const loadFeatured = async () => {
+      try {
+        const data = await productService.getAll()
+        // Mostramos solo los primeros 4 como "Destacados"
+        setFeatured(data.slice(0, 4))
+      } catch (error) {
+        console.error("Error cargando destacados:", error)
+      }
     }
+    loadFeatured()
   }, [])
 
   return (
@@ -41,7 +41,7 @@ export default function Home() {
             </div>
             <div className="col-lg-6 text-center">
               <img
-                src={tienda}
+                src="/images/tienda.png" // <--- RUTA CORREGIDA
                 alt="Tienda de Jane"
                 className="img-fluid rounded shadow-sm hero-img"
                 style={{ maxHeight: 380, objectFit: "cover" }}
@@ -65,7 +65,7 @@ export default function Home() {
           <div className="row g-4">
             <div className="col-md-4">
               <div className="card h-100 shadow-sm">
-                <img src={atencion} className="card-img-top" alt="Atención" style={{ height: 180, objectFit: "cover" }} />
+                <img src="/images/atencion.jpeg" className="card-img-top" alt="Atención" style={{ height: 180, objectFit: "cover" }} />
                 <div className="card-body">
                   <h5 className="card-title">Atención cercana</h5>
                   <p className="card-text text-muted">Resolvemos tus dudas y cuidamos cada detalle de tu compra.</p>
@@ -74,7 +74,7 @@ export default function Home() {
             </div>
             <div className="col-md-4">
               <div className="card h-100 shadow-sm">
-                <img src={calidad} className="card-img-top" alt="Calidad" style={{ height: 180, objectFit: "cover" }} />
+                <img src="/images/calidad.jpeg" className="card-img-top" alt="Calidad" style={{ height: 180, objectFit: "cover" }} />
                 <div className="card-body">
                   <h5 className="card-title">Calidad garantizada</h5>
                   <p className="card-text text-muted">Productos seleccionados de marcas confiables y al mejor precio.</p>
@@ -83,7 +83,7 @@ export default function Home() {
             </div>
             <div className="col-md-4">
               <div className="card h-100 shadow-sm">
-                <img src={comunidad} className="card-img-top" alt="Comunidad" style={{ height: 180, objectFit: "cover" }} />
+                <img src="/images/comunidad.jpeg" className="card-img-top" alt="Comunidad" style={{ height: 180, objectFit: "cover" }} />
                 <div className="card-body">
                   <h5 className="card-title">Compromiso con la comunidad</h5>
                   <p className="card-text text-muted">Apoyamos iniciativas locales y el comercio responsable.</p>
@@ -94,7 +94,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* DESTACADOS (si hay productos en storage) */}
+      {/* DESTACADOS (Cargados desde Backend) */}
       {featured.length > 0 && (
         <section className="py-5 bg-light">
           <div className="container">
@@ -105,6 +105,7 @@ export default function Home() {
             <div className="d-flex flex-wrap justify-content-center">
               {featured.map((p) => (
                 <div key={p.id} className="m-2">
+                  {/* Aquí usamos tu componente ProductCard */}
                   <ProductCard name={p.name} image={p.image} />
                 </div>
               ))}

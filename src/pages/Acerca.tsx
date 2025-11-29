@@ -1,6 +1,7 @@
-import tienda from "../images/tienda.png"
-import calidad from "../images/calidad.jpeg"
-import comunidad from "../images/comunidad.jpeg"
+// Borramos los imports de imágenes porque ya no están en src
+// import tienda from "../images/tienda.png" <--- ADIÓS
+// import calidad from "../images/calidad.jpeg" <--- ADIÓS
+// import comunidad from "../images/comunidad.jpeg" <--- ADIÓS
 
 export default function Acerca() {
   return (
@@ -13,7 +14,7 @@ export default function Acerca() {
             Conoce la historia, misión y visión detrás de <strong>Tienda de Jane</strong>.
           </p>
           <img
-            src={tienda}
+            src="/images/tienda.png" // <--- CAMBIO AQUÍ (Ruta directa)
             alt="Acerca de Tienda de Jane"
             className="img-fluid rounded shadow-sm"
             style={{ maxHeight: 320, objectFit: "cover" }}
@@ -39,7 +40,7 @@ export default function Acerca() {
             </div>
             <div className="col-lg-6 text-center">
               <img
-                src={calidad}
+                src="/images/calidad.jpeg" // <--- CAMBIO AQUÍ
                 alt="Calidad"
                 className="img-fluid rounded shadow-sm"
                 style={{ maxHeight: 300, objectFit: "cover" }}
@@ -88,7 +89,7 @@ export default function Acerca() {
 
           <div className="text-center mt-4">
             <img
-              src={comunidad}
+              src="/images/comunidad.jpeg" // <--- CAMBIO AQUÍ
               alt="Comunidad"
               className="img-fluid rounded shadow-sm"
               style={{ maxHeight: 260, objectFit: "cover" }}

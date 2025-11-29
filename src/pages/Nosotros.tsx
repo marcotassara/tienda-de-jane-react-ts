@@ -1,7 +1,9 @@
-import tienda from "../images/tienda.png"
-import equipo from "../images/atencion.jpeg"
-import calidad from "../images/calidad.jpeg"
-import comunidad from "../images/comunidad.jpeg"
+// src/pages/Nosotros.tsx
+
+// Borramos los imports antiguos
+// import tienda from "../images/tienda.png"
+// import equipo from "../images/atencion.jpeg"
+// ...
 
 export default function Nosotros() {
   return (
@@ -14,7 +16,7 @@ export default function Nosotros() {
             En <strong>Tienda de Jane</strong> trabajamos con pasión para ofrecerte productos de calidad, buen servicio y cercanía humana.
           </p>
           <img
-            src={tienda}
+            src="/images/tienda.png" // <--- CAMBIO: Ruta directa a public
             alt="Nuestra tienda"
             className="img-fluid rounded shadow-sm"
             style={{ maxHeight: 320, objectFit: "cover" }}
@@ -40,7 +42,7 @@ export default function Nosotros() {
             </div>
             <div className="col-lg-6 text-center">
               <img
-                src={equipo}
+                src="/images/atencion.jpeg" // <--- CAMBIO: Ruta directa
                 alt="Nuestro equipo"
                 className="img-fluid rounded shadow-sm"
                 style={{ maxHeight: 320, objectFit: "cover" }}
@@ -57,7 +59,7 @@ export default function Nosotros() {
           <div className="row g-4">
             <div className="col-md-4">
               <img
-                src={calidad}
+                src="/images/calidad.jpeg" // <--- CAMBIO: Ruta directa
                 alt="Calidad"
                 className="img-fluid rounded mb-3 shadow-sm"
                 style={{ height: 180, objectFit: "cover" }}
@@ -69,7 +71,7 @@ export default function Nosotros() {
             </div>
             <div className="col-md-4">
               <img
-                src={equipo}
+                src="/images/atencion.jpeg" // <--- CAMBIO: Reutilizamos la foto de atencion
                 alt="Atención"
                 className="img-fluid rounded mb-3 shadow-sm"
                 style={{ height: 180, objectFit: "cover" }}
@@ -81,7 +83,7 @@ export default function Nosotros() {
             </div>
             <div className="col-md-4">
               <img
-                src={comunidad}
+                src="/images/comunidad.jpeg" // <--- CAMBIO: Ruta directa
                 alt="Comunidad"
                 className="img-fluid rounded mb-3 shadow-sm"
                 style={{ height: 180, objectFit: "cover" }}
