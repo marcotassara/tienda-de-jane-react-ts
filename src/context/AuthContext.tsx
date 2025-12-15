@@ -1,4 +1,4 @@
-// src/context/AuthContext.tsx
+
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { authService, type LoginRequest, type User } from "../services/authService";
 
@@ -16,7 +16,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
-  // Al cargar la página, verificamos si hay algo guardado en el navegador
+  
   useEffect(() => {
     const storedUser = localStorage.getItem("jane_user");
     if (storedUser) {
@@ -26,22 +26,22 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   const login = async (credentials: LoginRequest) => {
-    // 1. Llamamos al servicio
+   
     const data = await authService.login(credentials);
     
-    // 2. Guardamos el usuario en el estado
+   
     setUser(data.user);
 
-    // 3. Guardamos en localStorage para persistencia (Requisito PDF)
+  
     localStorage.setItem("jane_user", JSON.stringify(data.user));
-    localStorage.setItem("jane_token", data.token); // Guardamos el token por si acaso
+    localStorage.setItem("jane_token", data.token); 
   };
 
   const logout = () => {
     setUser(null);
     localStorage.removeItem("jane_user");
     localStorage.removeItem("jane_token");
-    window.location.href = "/"; // Nos vamos al home
+    window.location.href = "/"; 
   };
 
   return (
@@ -51,7 +51,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-// Hook para usar el contexto fácil
+
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) throw new Error("useAuth debe usarse dentro de un AuthProvider");

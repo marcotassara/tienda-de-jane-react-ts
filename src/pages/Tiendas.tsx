@@ -4,19 +4,19 @@ export default function Tiendas() {
       nombre: "Sucursal Central",
       direccion: "Av. Los Aromos 1234, Santiago",
       horario: "Lunes a Sábado: 9:00 - 20:00",
-      imagen: "/images/tienda.png", // <--- Ruta fija
+      imagen: "/images/tienda.png", 
     },
     {
       nombre: "Sucursal Norte",
       direccion: "Av. Independencia 4500, Recoleta",
       horario: "Lunes a Viernes: 10:00 - 19:30",
-      imagen: "/images/tienda.png", // <--- Ruta fija
+      imagen: "/images/tienda.png", 
     },
     {
       nombre: "Sucursal Sur",
       direccion: "Camino El Bosque 980, San Bernardo",
       horario: "Lunes a Domingo: 9:00 - 21:00",
-      imagen: "/images/tienda.png", // <--- Ruta fija
+      imagen: "/images/tienda.png", 
     },
   ]
 
@@ -55,7 +55,7 @@ export default function Tiendas() {
         </div>
       </section>
       
-      {/* (Omití el mapa para acortar, pero puedes dejarlo si quieres) */}
+      
     </main>
   )
 }

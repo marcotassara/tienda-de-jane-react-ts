@@ -9,7 +9,7 @@ export default class ErrorBoundary extends React.Component<React.PropsWithChildr
   }
 
   componentDidCatch(error: unknown, info: React.ErrorInfo) {
-    console.error("💥 Error atrapado por ErrorBoundary:", error, info)
+    console.error(" Error atrapado por ErrorBoundary:", error, info)
   }
 
   render() {

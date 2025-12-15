@@ -1,6 +1,6 @@
-// src/data/products.ts
 
-// DEFINICIÓN DEL TIPO
+
+
 export interface Product {
   id: number
   name: string
@@ -10,12 +10,12 @@ export interface Product {
   stock: number
 }
 
-// DATOS DE EJEMPLO (Ahora usando rutas de la carpeta public)
+
 export const products: Product[] = [
   { 
     id: 1, 
     name: 'Coca-Cola 1.25L', 
-    image: '/images/coca-cola1.25L.jpg', // <--- Mira, es texto, no variable
+    image: '/images/coca-cola1.25L.jpg', 
     category: 'Bebidas',     
     price: 1200, 
     stock: 8 

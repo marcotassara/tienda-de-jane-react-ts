@@ -2,7 +2,7 @@ import { useCart } from "../context/CartContext"
 import { useNavigate } from "react-router-dom"
 
 export default function Carrito() {
-  // Hook seguro: si falta el provider devuelve un contexto vacío
+  
   const { cart, add, dec, remove, total, count } = useCart()
   const nav = useNavigate()
 

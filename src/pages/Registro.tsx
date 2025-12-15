@@ -5,12 +5,12 @@ import { useNavigate, Link } from "react-router-dom"
 export default function Registro() {
   const navigate = useNavigate()
   
-  // Estados para el formulario
+   
   const [formData, setFormData] = useState({
     username: "",
     password: "",
     nombreCompleto: "",
-    role: "USER" // Por defecto registramos Clientes (USER)
+    role: "USER" 
   })
 
   const [error, setError] = useState("")
@@ -28,11 +28,11 @@ export default function Registro() {
     setError("")
     
     try {
-      // Llamamos al servicio de registro (usando el endpoint POST /api/usuarios)
+      
       await authService.register(formData)
       setSuccess(true)
       
-      // Esperamos 2 segundos y redirigimos al login
+      
       setTimeout(() => {
         navigate("/login")
       }, 2000)

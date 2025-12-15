@@ -1,9 +1,9 @@
-// src/pages/IngresoStock.tsx
+
 import { useEffect, useState } from "react"
 import type { Product } from "../data/products"
 import { products as demo } from "../data/products"
 
-// Normaliza por compatibilidad: asegura price/stock
+
 const normalize = (p: any): Product & { price: number; stock: number } => ({
   id: p.id,
   name: p.name,
@@ -19,7 +19,7 @@ export default function IngresoStock() {
   const [precio, setPrecio] = useState<number>(1000)
   const [cantidad, setCantidad] = useState<number>(1)
 
-  // Carga inicial: localStorage o siembra demo si está vacío
+  
   useEffect(() => {
     const raw = localStorage.getItem("productos")
     let base: any[] = []
@@ -37,7 +37,7 @@ export default function IngresoStock() {
     setProductos(base.map(normalize))
   }, [])
 
-  // Persiste cada cambio
+  
   useEffect(() => {
     localStorage.setItem("productos", JSON.stringify(productos))
   }, [productos])

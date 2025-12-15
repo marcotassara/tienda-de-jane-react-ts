@@ -7,7 +7,7 @@ describe('Footer Component', () => {
     render(<Footer />);
     
     const currentYear = new Date().getFullYear();
-    // Buscamos un texto que contenga el año
+
     const footerText = screen.getByText(new RegExp(`© ${currentYear} Tienda de Jane`, 'i'));
     
     expect(footerText).toBeInTheDocument();

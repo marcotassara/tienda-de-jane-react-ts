@@ -56,5 +56,5 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>
 }
 
-/** Hook seguro: si el Provider no está montado, devuelve un contexto vacío en lugar de lanzar error */
+
 export const useCart = () => useContext(Ctx) ?? defaultCtx

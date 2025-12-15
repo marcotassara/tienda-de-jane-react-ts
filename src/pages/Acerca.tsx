@@ -1,12 +1,9 @@
-// Borramos los imports de imágenes porque ya no están en src
-// import tienda from "../images/tienda.png" <--- ADIÓS
-// import calidad from "../images/calidad.jpeg" <--- ADIÓS
-// import comunidad from "../images/comunidad.jpeg" <--- ADIÓS
+
 
 export default function Acerca() {
   return (
     <main>
-      {/* HERO */}
+      
       <section className="py-5 bg-light border-bottom">
         <div className="container text-center">
           <h1 className="display-5 fw-bold text-danger mb-3">Acerca de</h1>
@@ -14,7 +11,7 @@ export default function Acerca() {
             Conoce la historia, misión y visión detrás de <strong>Tienda de Jane</strong>.
           </p>
           <img
-            src="/images/tienda.png" // <--- CAMBIO AQUÍ (Ruta directa)
+            src="/images/tienda.png" 
             alt="Acerca de Tienda de Jane"
             className="img-fluid rounded shadow-sm"
             style={{ maxHeight: 320, objectFit: "cover" }}
@@ -22,7 +19,7 @@ export default function Acerca() {
         </div>
       </section>
 
-      {/* MISIÓN / VISIÓN */}
+      
       <section className="py-5">
         <div className="container">
           <div className="row g-4 align-items-center">
@@ -40,7 +37,7 @@ export default function Acerca() {
             </div>
             <div className="col-lg-6 text-center">
               <img
-                src="/images/calidad.jpeg" // <--- CAMBIO AQUÍ
+                src="/images/calidad.jpeg" 
                 alt="Calidad"
                 className="img-fluid rounded shadow-sm"
                 style={{ maxHeight: 300, objectFit: "cover" }}
@@ -50,7 +47,7 @@ export default function Acerca() {
         </div>
       </section>
 
-      {/* LÍNEA DE TIEMPO */}
+      
       <section className="py-5 bg-light">
         <div className="container">
           <h2 className="fw-bold text-danger text-center mb-4">Nuestra historia</h2>
@@ -89,7 +86,7 @@ export default function Acerca() {
 
           <div className="text-center mt-4">
             <img
-              src="/images/comunidad.jpeg" // <--- CAMBIO AQUÍ
+              src="/images/comunidad.jpeg" 
               alt="Comunidad"
               className="img-fluid rounded shadow-sm"
               style={{ maxHeight: 260, objectFit: "cover" }}
@@ -98,7 +95,7 @@ export default function Acerca() {
         </div>
       </section>
 
-      {/* FAQ */}
+      
       <section className="py-5">
         <div className="container">
           <h2 className="fw-bold text-danger text-center mb-4">Preguntas frecuentes</h2>
@@ -145,7 +142,7 @@ export default function Acerca() {
         </div>
       </section>
 
-      {/* CTA FINAL */}
+      
       <section className="py-5 bg-danger text-white">
         <div className="container text-center">
           <h3 className="fw-bold mb-2">¿Listo para conocer nuestros productos?</h3>

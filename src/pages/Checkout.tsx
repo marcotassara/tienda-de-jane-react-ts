@@ -1,23 +1,23 @@
 import { useEffect, useState } from "react"
 import { useCart } from "../context/CartContext"
-import { useAuth } from "../context/AuthContext" // <--- Necesitamos saber quién compra
+import { useAuth } from "../context/AuthContext" 
 import { useNavigate } from "react-router-dom"
-import { orderService } from "../services/orderService" // <--- Importamos el servicio nuevo
+import { orderService } from "../services/orderService" 
 
 export default function Checkout() {
   const { total, clear, cart, count } = useCart()
-  const { user } = useAuth() // <--- Sacamos al usuario logueado
+  const { user } = useAuth() 
   const nav = useNavigate()
   
   const [procesando, setProcesando] = useState(false)
 
-  // Si el carrito está vacío, te devuelve
+  
   useEffect(() => {
     if (Object.keys(cart).length === 0) nav("/carrito")
   }, [cart, nav])
 
   const handlePagar = async () => {
-    // 1. Validamos que el usuario esté logueado
+    
     if (!user) {
       alert("Debes iniciar sesión para completar la compra, mi rey. 😉")
       nav("/login")
@@ -27,12 +27,12 @@ export default function Checkout() {
     setProcesando(true)
 
     try {
-      // 2. Preparamos el resumen de productos (Ej: "2x Coca, 1x Fafita")
+      
       const resumen = Object.values(cart)
         .map(item => `${item.qty}x ${item.name}`)
         .join(", ");
 
-      // 3. Enviamos el pedido al Backend (Puerto 8082)
+      
       await orderService.createOrder({
         usuarioId: user.id || 0,
         nombreCliente: user.nombreCompleto || user.username,
@@ -40,7 +40,7 @@ export default function Checkout() {
         detalleProductos: resumen
       })
 
-      // 4. Si todo sale bien: Limpiamos carrito y vamos a gracias
+      
       clear()
       nav("/gracias")
 

@@ -1,9 +1,9 @@
 import { Link, NavLink } from "react-router-dom"
 import { useCart } from "../context/CartContext"
-import { useAuth } from "../context/AuthContext" // <--- Importamos el hook de Auth
+import { useAuth } from "../context/AuthContext" 
 
 export default function Navbar() {
-  // Intentamos leer el contexto del carrito
+  
   let count = 0
   try {
     count = useCart().count
@@ -11,18 +11,18 @@ export default function Navbar() {
     count = 0
   }
 
-  // Obtenemos el usuario y la función logout del contexto
-  const { user, logout } = useAuth() // <--- ¡Aquí está la magia!
+  
+  const { user, logout } = useAuth() 
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-danger">
       <div className="container-fluid">
-        {/* Marca */}
+        
         <Link to="/" className="navbar-brand ms-2 fw-bold" style={{ letterSpacing: "1px" }}>
-          Tienda de Jane 🥤
+          Tienda de Jane 
         </Link>
 
-        {/* Botón responsive */}
+        
         <button
           className="navbar-toggler"
           type="button"
@@ -35,7 +35,7 @@ export default function Navbar() {
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        {/* Enlaces */}
+        
         <div id="navJane" className="collapse navbar-collapse">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
@@ -50,16 +50,19 @@ export default function Navbar() {
             <li className="nav-item">
               <NavLink to="/tiendas" className="nav-link">Tiendas</NavLink>
             </li>
-            {/* Ocultamos opciones "admin" si no eres admin, o las dejamos visibles pero restringidas */}
+            <li className="nav-item">
+              <Link to="/mis-pedidos" className="nav-link text-danger">Mis Pedidos 📦</Link>
+            </li>
+            
             <li className="nav-item">
               <NavLink to="/ingreso" className="nav-link">Ingreso Stock</NavLink>
             </li>
           </ul>
 
-          {/* ZONA DERECHA: Carrito y Usuario */}
+          
           <div className="d-flex align-items-center gap-3">
             
-            {/* Botón Carrito con Badge (Contador) */}
+            
             <Link to="/carrito" className="btn btn-light position-relative text-danger fw-bold border-0">
                🛒 <span className="d-none d-md-inline ms-1">Carrito</span>
                {count > 0 && (
@@ -70,9 +73,9 @@ export default function Navbar() {
                )}
             </Link>
 
-            {/* LÓGICA DE USUARIO: ¿Está logueado? */}
+            
             {user ? (
-              // CASO 1: SÍ ESTÁ LOGUEADO
+             
               <div className="dropdown">
                 <button 
                   className="btn btn-outline-light dropdown-toggle fw-bold" 
@@ -93,7 +96,7 @@ export default function Navbar() {
                 </ul>
               </div>
             ) : (
-              // CASO 2: NO ESTÁ LOGUEADO
+              
               <Link to="/login" className="btn btn-warning fw-bold shadow-sm">
                 🔒 Ingresar
               </Link>

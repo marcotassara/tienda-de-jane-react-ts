@@ -3,7 +3,8 @@ import Navbar from "./sharedComponents/Navbar"
 import Footer from "./sharedComponents/Footer"
 
 
-// Páginas
+
+ 
 import Home from "./pages/Home"
 import Nosotros from "./pages/Nosotros"
 import Productos from "./pages/Productos"
@@ -16,11 +17,12 @@ import IngresoStock from "./pages/IngresoStock"
 import { AuthProvider } from "./context/AuthContext"; 
 import Login from "./pages/Login"; //
 import Registro from "./pages/Registro";
+import MisPedidos from "./pages/MisPedidos";
 
-// Contexto del carrito
+ 
 import { CartProvider } from "./context/CartContext"
 
-// ErrorBoundary para capturar errores de runtime
+ 
 import ErrorBoundary from "./sharedComponents/ErrorBoundary"
 
 export default function App() {
@@ -34,6 +36,7 @@ export default function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/" element={<Home />} />
             <Route path="/nosotros" element={<Nosotros />} />
+            <Route path="/mis-pedidos" element={<MisPedidos />} />
             <Route path="/productos" element={<Productos />} />
             <Route path="/tiendas" element={<Tiendas />} />
             <Route path="/acerca" element={<Acerca />} />

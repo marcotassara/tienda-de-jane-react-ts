@@ -1,14 +1,9 @@
-// src/pages/Nosotros.tsx
 
-// Borramos los imports antiguos
-// import tienda from "../images/tienda.png"
-// import equipo from "../images/atencion.jpeg"
-// ...
 
 export default function Nosotros() {
   return (
     <main>
-      {/* HERO */}
+      
       <section className="py-5 bg-light border-bottom">
         <div className="container text-center">
           <h1 className="display-5 fw-bold mb-3 text-danger">Nosotros</h1>
@@ -16,7 +11,7 @@ export default function Nosotros() {
             En <strong>Tienda de Jane</strong> trabajamos con pasión para ofrecerte productos de calidad, buen servicio y cercanía humana.
           </p>
           <img
-            src="/images/tienda.png" // <--- CAMBIO: Ruta directa a public
+            src="/images/tienda.png" 
             alt="Nuestra tienda"
             className="img-fluid rounded shadow-sm"
             style={{ maxHeight: 320, objectFit: "cover" }}
@@ -24,7 +19,7 @@ export default function Nosotros() {
         </div>
       </section>
 
-      {/* QUIÉNES SOMOS */}
+      
       <section className="py-5">
         <div className="container">
           <div className="row align-items-center g-4">
@@ -42,7 +37,7 @@ export default function Nosotros() {
             </div>
             <div className="col-lg-6 text-center">
               <img
-                src="/images/atencion.jpeg" // <--- CAMBIO: Ruta directa
+                src="/images/atencion.jpeg" 
                 alt="Nuestro equipo"
                 className="img-fluid rounded shadow-sm"
                 style={{ maxHeight: 320, objectFit: "cover" }}
@@ -52,14 +47,14 @@ export default function Nosotros() {
         </div>
       </section>
 
-      {/* NUESTROS VALORES */}
+      
       <section className="py-5 bg-light">
         <div className="container text-center">
           <h2 className="fw-bold mb-5 text-danger">Nuestros valores</h2>
           <div className="row g-4">
             <div className="col-md-4">
               <img
-                src="/images/calidad.jpeg" // <--- CAMBIO: Ruta directa
+                src="/images/calidad.jpeg" 
                 alt="Calidad"
                 className="img-fluid rounded mb-3 shadow-sm"
                 style={{ height: 180, objectFit: "cover" }}
@@ -71,7 +66,7 @@ export default function Nosotros() {
             </div>
             <div className="col-md-4">
               <img
-                src="/images/atencion.jpeg" // <--- CAMBIO: Reutilizamos la foto de atencion
+                src="/images/atencion.jpeg" 
                 alt="Atención"
                 className="img-fluid rounded mb-3 shadow-sm"
                 style={{ height: 180, objectFit: "cover" }}
@@ -83,7 +78,7 @@ export default function Nosotros() {
             </div>
             <div className="col-md-4">
               <img
-                src="/images/comunidad.jpeg" // <--- CAMBIO: Ruta directa
+                src="/images/comunidad.jpeg" 
                 alt="Comunidad"
                 className="img-fluid rounded mb-3 shadow-sm"
                 style={{ height: 180, objectFit: "cover" }}
@@ -97,7 +92,7 @@ export default function Nosotros() {
         </div>
       </section>
 
-      {/* CONTACTO */}
+      
       <section className="py-5">
         <div className="container text-center">
           <h2 className="fw-bold text-danger mb-3">Contáctanos</h2>
@@ -106,7 +101,7 @@ export default function Nosotros() {
             escríbenos y te responderemos lo antes posible.
           </p>
           <a href="mailto:contacto@tiendadejane.cl" className="btn btn-danger btn-lg">
-            ✉️ contacto@tiendadejane.cl
+            contacto@tiendadejane.cl
           </a>
         </div>
       </section>

@@ -4,30 +4,30 @@ import { useAuth } from "../context/AuthContext"
 import { productService, type Product } from "../services/productService"
 
 export default function Productos() {
-  // Estado de datos
+   
   const [products, setProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState("")
   
-  // Estado para el BUSCADOR (Nuevo) 🔍
+  
   const [busqueda, setBusqueda] = useState("")
 
-  // Contextos
+  
   const { add } = useCart()
   const { user } = useAuth() 
 
-  // Estados para CREAR nuevo producto
+  
   const [nuevoNombre, setNuevoNombre] = useState("")
   const [nuevaCategoria, setNuevaCategoria] = useState("")
   const [nuevoPrecio, setNuevoPrecio] = useState(0)
   const [nuevoStock, setNuevoStock] = useState(0)
   const [nuevaImagen, setNuevaImagen] = useState("/images/coca-cola1.25L.jpg") 
 
-  // Estados para EDITAR
+  
   const [editandoId, setEditandoId] = useState<number | null>(null)
   const [editForm, setEditForm] = useState<Partial<Product>>({})
 
-  // Carga inicial
+  
   useEffect(() => {
     cargarProductos()
   }, [])
@@ -45,17 +45,17 @@ export default function Productos() {
     }
   }
 
-  // --- LÓGICA DE FILTRADO (MAGIA AQUÍ) 🎩 ---
+
   const productosFiltrados = products.filter((p) => {
-    // Convertimos todo a minúsculas para que de igual si escribes "Coca" o "coca"
+   
     const texto = busqueda.toLowerCase()
     return (
-      p.name.toLowerCase().includes(texto) || // Busca por nombre
-      p.category.toLowerCase().includes(texto) // Busca por categoría
+      p.name.toLowerCase().includes(texto) || 
+      p.category.toLowerCase().includes(texto) 
     )
   })
 
-  // --- LÓGICA DE CREACIÓN ---
+  
   const handleCrear = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!nuevoNombre.trim()) return
@@ -75,7 +75,7 @@ export default function Productos() {
     }
   }
 
-  // --- LÓGICA DE EDICIÓN ---
+  
   const iniciarEdicion = (p: Product) => {
     setEditandoId(p.id)
     setEditForm(p) 
@@ -97,7 +97,7 @@ export default function Productos() {
     setEditForm({})
   }
 
-  // --- LÓGICA DE ELIMINACIÓN ---
+  
   const handleEliminar = async (id: number) => {
     if (!confirm("¿Seguro que quieres borrar este producto de la base de datos?")) return
     try {
@@ -117,7 +117,7 @@ export default function Productos() {
       <div className="container">
         <h2 className="section-title text-center text-danger mb-4">Gestión de Productos</h2>
 
-        {/* BARRA DE BÚSQUEDA (NUEVO) */}
+       
         <div className="row justify-content-center mb-5">
             <div className="col-md-6">
                 <div className="input-group input-group-lg shadow-sm">
@@ -136,7 +136,7 @@ export default function Productos() {
             </div>
         </div>
 
-        {/* PANEL DE ADMINISTRACIÓN (Solo Admin) */}
+        
         {user && (
           <div className="card p-4 mb-5 border-danger shadow-sm">
             <h5 className="text-danger fw-bold mb-3">🛠️ Panel de Control: Agregar Producto</h5>
@@ -171,7 +171,7 @@ export default function Productos() {
         {loading && <div className="text-center py-5"><div className="spinner-border text-danger"></div></div>}
         {error && <div className="alert alert-warning text-center">{error}</div>}
 
-        {/* GRILLA DE PRODUCTOS FILTRADOS */}
+        
         {!loading && (
           <div className="d-flex flex-wrap justify-content-center">
             {productosFiltrados.length === 0 ? (
@@ -183,7 +183,7 @@ export default function Productos() {
                 <div key={p.id} className="m-3" style={{ width: "18rem" }}>
                     
                     {editandoId === p.id ? (
-                    // MODO EDICIÓN
+                    
                     <div className="card h-100 shadow border-warning p-2">
                         <div className="card-header bg-warning text-dark fw-bold">Editando...</div>
                         <div className="card-body">
@@ -199,7 +199,7 @@ export default function Productos() {
                         </div>
                     </div>
                     ) : (
-                    // MODO VISUALIZACIÓN
+                    
                     <div className="card h-100 shadow-sm border-0 product-card-hover">
                         <div className="position-relative">
                             <img src={p.image} className="card-img-top" alt={p.name} style={{ height: "200px", objectFit: "cover" }} />

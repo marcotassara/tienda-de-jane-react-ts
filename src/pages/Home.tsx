@@ -1,20 +1,19 @@
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import ProductCard from "../sharedComponents/ProductCard"
-import { productService, type Product } from "../services/productService" // <--- Usamos el servicio nuevo
+import { productService, type Product } from "../services/productService" 
 
-// Eliminamos los imports de imágenes viejos
-// import tienda from "../images/tienda.png" ...
+
 
 export default function Home() {
   const [featured, setFeatured] = useState<Product[]>([])
 
   useEffect(() => {
-    // Carga los productos reales desde el Backend (Puerto 8081)
+    
     const loadFeatured = async () => {
       try {
         const data = await productService.getAll()
-        // Mostramos solo los primeros 4 como "Destacados"
+        
         setFeatured(data.slice(0, 4))
       } catch (error) {
         console.error("Error cargando destacados:", error)
@@ -25,7 +24,7 @@ export default function Home() {
 
   return (
     <main>
-      {/* HERO */}
+     
       <section className="py-5 bg-light">
         <div className="container">
           <div className="row align-items-center g-4">
@@ -41,7 +40,7 @@ export default function Home() {
             </div>
             <div className="col-lg-6 text-center">
               <img
-                src="/images/tienda.png" // <--- RUTA CORREGIDA
+                src="/images/tienda.png" 
                 alt="Tienda de Jane"
                 className="img-fluid rounded shadow-sm hero-img"
                 style={{ maxHeight: 380, objectFit: "cover" }}
@@ -51,14 +50,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FRANJA PROMO */}
+      
       <section className="py-3 bg-danger text-white">
         <div className="container text-center">
           <strong>📦 Envío gratis</strong> en compras desde <strong>$20.000</strong> — ¡aprovecha!
         </div>
       </section>
 
-      {/* FEATURES */}
+      
       <section className="py-5">
         <div className="container">
           <h2 className="section-title text-center mb-4">¿Por qué comprar con nosotros?</h2>
@@ -94,7 +93,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* DESTACADOS (Cargados desde Backend) */}
+      
       {featured.length > 0 && (
         <section className="py-5 bg-light">
           <div className="container">
@@ -105,7 +104,7 @@ export default function Home() {
             <div className="d-flex flex-wrap justify-content-center">
               {featured.map((p) => (
                 <div key={p.id} className="m-2">
-                  {/* Aquí usamos tu componente ProductCard */}
+                  
                   <ProductCard name={p.name} image={p.image} />
                 </div>
               ))}

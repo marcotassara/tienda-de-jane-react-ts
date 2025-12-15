@@ -1,16 +1,16 @@
 :root {
-  --brand-danger: #b71c1c;         /* rojo profundo similar al de tu captura */
-  --page-bg: #fffde7;              /* crema */
+  --brand-danger: #b71c1c;         
+  --page-bg: #fffde7;              
 }
 
-/* Base */
+
 html, body, #root { height: 100%; }
 body {
   background-color: var(--page-bg);
   font-family: "Courier New", Courier, monospace;
 }
 
-/* Navbar */
+
 .navbar-brand {
   font-size: clamp(1.2rem, 2.5vw, 2rem);
   letter-spacing: 2px;
@@ -22,7 +22,7 @@ body {
   text-decoration: underline;
 }
 
-/* Secciones */
+
 .section {
   padding-block: clamp(24px, 5vw, 48px);
 }
@@ -32,7 +32,7 @@ body {
   letter-spacing: 1px;
 }
 
-/* Tarjetas */
+
 .card.product {
   width: min(18rem, 90vw);
   border: 0;

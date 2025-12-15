@@ -13,13 +13,13 @@ export default function Login() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError(""); // Limpiar errores previos
+    setError(""); 
     
     try {
       await login({ username, password });
-      navigate("/"); // ¡Éxito! Nos vamos al inicio
+      navigate("/"); 
     } catch (err) {
-      setError("Usuario o contraseña incorrectos 😢");
+      setError("Usuario o contraseña incorrectos ");
     }
   };
 
